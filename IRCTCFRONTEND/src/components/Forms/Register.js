@@ -1,9 +1,11 @@
-import React, { useState } from 'react' 
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'; 
 import BASE_URL from '../Helper';
 
 const Register = () => {
   const [username, setuserName] = useState('');
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
   const RegisterUesr = async (e) => {
     e.preventDefault();
     if (!username || !password) {
@@ -22,13 +24,17 @@ const Register = () => {
       credentials: 'include',
       body:modifiedData
     })
-    const data =await response.json();
+    const data = await response.json();
+    console.log(data);
     if (!response.ok) {
       throw new Error(data.message);
     }
+    alert(data.message);
+    navigate('/login-page')
   }
   catch (err) {
     console.log(err.message);
+     alert(err.message);
   }
   }
   return (

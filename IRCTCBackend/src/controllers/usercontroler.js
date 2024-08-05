@@ -8,6 +8,7 @@ const SecretKey = process.env.USER_SECRET_TOKEN;
 
 const createUser = async (req, res) => {
     const { username, password, role } = req.body;
+    console.log(req.body);
     try {
         const [dpUser] = await Pool.query(`select * from users where username=?`, [username]);
         console.log(dpUser)
